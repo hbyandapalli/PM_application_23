@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+string ipv4_decimal(string s){
+    string res;
+    // cout<<s.size()<<endl;
+    int coeff=0;
+    if(s.size()!=32) res="ERROR!!!!";
+    else{
+        int start=0;
+        for(int i=0;i<4;i++){
+            int n=0;
+            for(int j=start+7;j>=start;j--){
+                if(s[j]=='1') n=n+pow(2,coeff);
+                // cout<<pow(2,coeff)<<endl;}
+                coeff++;
+            }
+            // cout<<n<<" k"<<endl;
+            start=start+8;
+            string spam="";
+            for(int j=0;j<3;j++){
+                int rem=n%10;
+                rem=rem+48;
+                n=n/10;
+                char value=(char)rem;
+                spam=value+spam;
+                if(n==0) break;
+            }
+            res=res+spam;
+            coeff=0;
+            n=0;
+            if(i==3) break;
+            res=res+".";
+        }
+    }
+    return res;
+}
+
+int main(){
+    string s;
+    cin>>s;
+    cout<<ipv4_decimal(s)<<endl;
+}
